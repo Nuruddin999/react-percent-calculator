@@ -1,16 +1,17 @@
 .mainsec {
+  width: 100%;
   color: #242629;
-  font-size: 20px;
+  font-size: 18px;
 
   .textBlock {
-    margin: 32px;
+    margin: 16px;
 
     h1 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 600;
       line-height: 1.4;
 
-      @media screen and (min-width: 1280px) {
+      @media screen and (min-width: 1024px) {
         font-size: 32px;
       }
     }
@@ -18,6 +19,7 @@
 
   .contentBlock {
     display: flex;
+    margin: 2px 16px;
 
     .dataSide {
       flex: 1;
@@ -25,9 +27,23 @@
       .inpts, .dataWrapper {
         display: flex;
       }
+      .inpts {
+        flex-wrap: wrap;
+        gap: 12px;
+        .sumInp {
+          flex-basis: 80%;
+        }
+        .calcButton {
+          width: 15%;
+          height: 100%;
+          margin-left: auto;
+        }
+      }
 
       .dataWrapper {
         flex-wrap: wrap;
+        max-height: 60vh;
+        overflow: scroll;
 
         .dataItem {
           flex-basis: 100%;
@@ -58,6 +74,10 @@
           }
         }
       }
+      .horizontalChart {
+        display: block;
+        margin-top: 8px;
+      }
     }
 
     .chartSide {
@@ -72,9 +92,29 @@
         display: block;
         flex: 1;
       }
-
-      .inpts {
-        flex-wrap: nowrap;
+      .dataSide {
+        .dataWrapper{
+          max-height: 75vh;
+        }
+        .inpts {
+          flex-wrap: nowrap;
+          .calcButton {
+            margin: 0;
+            width: 20%;
+          }
+        }
+        .horizontalChart {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .contentBlock {
+      .dataSide {
+        .dataWrapper{
+          max-height: 80vh;
+        }
       }
     }
   }
