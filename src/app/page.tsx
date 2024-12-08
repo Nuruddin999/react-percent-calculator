@@ -4,12 +4,14 @@ import styles from "./main.module.scss";
 import React, {useState} from "react";
 import InputField from "@/components/ui/InputField";
 import CustomButton from "@/components/ui/button";
-import ReactECharts from 'echarts-for-react';
 import {getActualColors, GithubChart} from "@/components/GithubChart";
 import Participant from "@/components/Participant";
+import dynamic from "next/dynamic";
 
 
 type SharesData = Array<{ name: string, sum: number, share: string }>
+
+const AChart = dynamic(() => import('../components/ApacheChart/ApacheChart'))
 
 export default function Home() {
     const [name, setName] = useState('');
@@ -90,39 +92,7 @@ export default function Home() {
                         })}
                     </div>
                 </div>
-                <div className={styles.chartSide}>
-                    {data.length > 0 && <ReactECharts
-                        option={{
-                            title: {
-                                text: 'Участники',
-                                left: 'center'
-                            },
-                            legend: {
-                                bottom: 10,
-                                left: 'center',
-                                data: data.map(item => item.name)
-                            },
-                            series: [
-                                {
-                                    type: 'pie',
-                                    radius: '85%',
-                                    data: data.map(item => ({name: item.name, value: item.sum})),
-                                    emphasis: {
-                                        itemStyle: {
-                                            shadowBlur: 10,
-                                            shadowOffsetX: 0,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
-                                    }
-                                }
-                            ]
-                        }}
-                        style={{height: '70vh', width: '100%'}}
-                        notMerge={true}
-                        lazyUpdate={true}
-                        theme={"theme_name"}
-                    />}
-                </div>
+                {data.length > 0 && <AChart data={data} />}
             </div>
         </div>
     );
